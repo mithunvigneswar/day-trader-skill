@@ -1,0 +1,46 @@
+{
+ "CM": [
+  {
+   "tradingDate": "26-Jan-2026",
+   "weekDay": "Monday",
+   "description": "Republic Day",
+   "morning_session": null,
+   "evening_session": null,
+   "Sr_no": 2
+  },
+  {
+   "tradingDate": "20-Oct-2026",
+   "weekDay": "Tuesday",
+   "description": "Dussehra",
+   "morning_session": null,
+   "evening_session": null,
+   "Sr_no": 16
+  },
+  {
+   "tradingDate": "08-Nov-2026",
+   "weekDay": "Sunday",
+   "description": "Diwali Laxmi Pujan*",
+   "morning_session": null,
+   "evening_session": null,
+   "Sr_no": 17
+  },
+  {
+   "tradingDate": "10-Nov-2026",
+   "weekDay": "Tuesday",
+   "description": "Diwali-Balipratipada",
+   "morning_session": null,
+   "evening_session": null,
+   "Sr_no": 18
+  }
+ ],
+ "CD": [
+  {
+   "tradingDate": "15-Jan-2026",
+   "weekDay": "Thursday",
+   "description": "Municipal Corporation Election - Maharashtra",
+   "morning_session": null,
+   "evening_session": null,
+   "Sr_no": 1
+  }
+ ]
+}

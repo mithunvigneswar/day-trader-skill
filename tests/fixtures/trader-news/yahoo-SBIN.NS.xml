@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- synthetic fixture written for the tests in the shape of Yahoo Finance headline RSS; not real news -->
+<rss version="2.0">
+    <channel>
+        <description>Latest Financial News for SBIN.NS</description>
+        <item>
+            <description>State Bank of India reported quarterly earnings above estimates.</description>
+            <guid isPermaLink="false">sbi-q2-results-profit-rises</guid>
+            <link>https://finance.yahoo.com/news/sbi-q2-results-profit-rises.html</link>
+            <pubDate>Mon, 19 Oct 2026 03:50:00 +0000</pubDate>
+            <title>SBI Q2 results: net profit rises 12% on lower provisions</title>
+        </item>
+        <item>
+            <description>Lenders gained after the central bank decision.</description>
+            <guid isPermaLink="false">rbi-repo-rate-unchanged-bank-stocks</guid>
+            <link>https://finance.yahoo.com/news/rbi-repo-rate-unchanged-bank-stocks.html</link>
+            <pubDate>Mon, 19 Oct 2026 04:10:00 +0000</pubDate>
+            <title>RBI keeps repo rate unchanged; bank stocks edge higher (NSE: SBIN)</title>
+        </item>
+        <item>
+            <description>Index heavyweights moved in a narrow range.</description>
+            <guid isPermaLink="false">nifty-bank-opens-flat</guid>
+            <link>https://finance.yahoo.com/news/nifty-bank-opens-flat.html</link>
+            <pubDate>Mon, 19 Oct 2026 04:30:00 +0000</pubDate>
+            <title>Nifty Bank opens flat as SBIN, HDFCBANK trade mixed</title>
+        </item>
+        <item>
+            <description>The board approved the payout on Monday.</description>
+            <guid isPermaLink="false">sbi-declares-interim-dividend</guid>
+            <link>https://finance.yahoo.com/news/sbi-declares-interim-dividend.html</link>
+            <pubDate>Mon, 19 Oct 2026 05:10:00 +0000</pubDate>
+            <title>SBI declares interim dividend, record date next week</title>
+        </item>
+    </channel>
+</rss>

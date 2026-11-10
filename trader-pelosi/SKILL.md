@@ -1,16 +1,14 @@
 ---
 name: trader-pelosi
 description: >-
-  The Pelosi Tracker. Watches the stock trades members of Congress must
-  disclose under the STOCK Act: reads the House Clerk's public Periodic
-  Transaction Reports (PTRs) as soon as they are posted, alerts once per new
-  filing, and turns each PDF into clean rows (who, owner, stock, ticker,
-  buy or sell, options strike and expiry, trade date, amount range, how many
-  days it took to disclose). Flags trades in stocks you hold. Senate reports
-  are covered by a documented manual route. Use when the user says "what is
-  Pelosi buying", "track Nancy Pelosi", "Congress trades", "politician stock
-  trades", "did any congressman buy X", "alert me when Pelosi files", or
-  "run the Pelosi skill".
+  The Pelosi Tracker. Disabled in the NSE pack: it read the US House Clerk's
+  public Periodic Transaction Reports under the STOCK Act, and India has no
+  equivalent disclosure feed. The tool prints "trader-pelosi is not available
+  for NSE (it reads US House disclosures)", exits with code 1 and fetches
+  nothing. Use when the user says "what is Pelosi buying", "Congress trades",
+  "politician stock trades" or "run the Pelosi skill": explain it is not
+  available for NSE. Not financial advice, and nothing here places an order
+  without the user's yes.
 argument-hint: "[member name] [--read]"
 ---
 
@@ -25,6 +23,11 @@ It is fast. It is not early. A PTR is due within 30 days of the member
 learning of the trade and never more than 45 days after it, so by the time
 anyone can read it the trade is days or weeks old. There is no inside
 information here: only public filings, read quickly. Say that every time.
+
+**Disabled for NSE.** `ptr.py` prints "trader-pelosi is not available for NSE
+(it reads US House disclosures)" and exits 1 without any network call. Do not
+try to work around it or fetch House or Senate data. The description of the
+original US behaviour below is kept for reference only.
 
 Tool in this folder (standard library Python; `pdftotext` from poppler is
 optional, to read the PDFs locally):

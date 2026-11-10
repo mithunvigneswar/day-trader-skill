@@ -19,10 +19,44 @@ def companyfacts(cik):
 def run(args):
     out, err = io.StringIO(), io.StringIO()
     with redirect_stdout(out), redirect_stderr(err):
-        code = facts.main(args)
+        code = facts._us_main(args)   # the reference code; main() itself is disabled, see Disabled below
     return code, out.getvalue(), err.getvalue()
 
 
+
+class Disabled(unittest.TestCase):
+    """trader-analyst reads US SEC filings. The NSE pack has no such feed, so main() does nothing."""
+
+    def test_main_prints_one_line_and_exits_1_without_touching_the_network(self):
+        calls = []
+        old = facts.urllib.request.urlopen
+        facts.urllib.request.urlopen = lambda *a, **k: calls.append(a) or (_ for _ in ()).throw(AssertionError("network"))
+        try:
+            for argv in ([], ["AAPL"], ["SBIN.NS"], ["AAPL", "--offline", DIR], ["--help"], ["AAPL", "--json"]):
+                out, err = io.StringIO(), io.StringIO()
+                with redirect_stdout(out), redirect_stderr(err):
+                    code = facts.main(argv)
+                self.assertEqual(code, 1, argv)
+                self.assertEqual(out.getvalue(), "", argv)
+                self.assertEqual(err.getvalue(), "trader-analyst is not available for NSE (it reads US SEC filings)\n")
+        finally:
+            facts.urllib.request.urlopen = old
+        self.assertEqual(calls, [])
+
+    def test_the_message_constant(self):
+        self.assertEqual(facts.DISABLED, "trader-analyst is not available for NSE (it reads US SEC filings)")
+
+    def test_the_script_exits_1(self):
+        import subprocess
+        import sys
+        here = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        p = subprocess.run([sys.executable, os.path.join(here, "trader-analyst", "facts.py"), "SBIN.NS"],
+                           stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
+        self.assertEqual(p.returncode, 1)
+        self.assertEqual(p.stderr.strip(), facts.DISABLED)
+
+
+# The tests below cover the US reference code that is kept but unreachable (they run offline on saved SEC files).
 class Apple(unittest.TestCase):
     def setUp(self):
         self.r = facts.analyse(companyfacts("0000320193"), quarters=8)

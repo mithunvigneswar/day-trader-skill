@@ -21,10 +21,51 @@ def text(name):
 def run(args):
     out, err = io.StringIO(), io.StringIO()
     with redirect_stdout(out), redirect_stderr(err):
-        code = ptr.main(args)
+        code = ptr._us_main(args)   # the reference code; main() itself is disabled, see Disabled below
     return code, out.getvalue(), err.getvalue()
 
 
+
+class Disabled(unittest.TestCase):
+    """trader-pelosi reads US House disclosures. The NSE pack has no such feed, so main() does nothing."""
+
+    def test_main_prints_one_line_and_exits_1_without_touching_the_network(self):
+        calls = []
+
+        def boom(*a, **k):
+            calls.append(a)
+            raise AssertionError("network or subprocess")
+
+        old = (ptr.urllib.request.urlopen, ptr.subprocess.run, ptr.subprocess.Popen)
+        ptr.urllib.request.urlopen, ptr.subprocess.run, ptr.subprocess.Popen = boom, boom, boom
+        try:
+            for argv in ([], ["index"], ["index", "--member", "pelosi"], ["new"], ["fetch", "20035143"],
+                         ["index", "--offline", ZIP], ["--help"]):
+                out, err = io.StringIO(), io.StringIO()
+                with redirect_stdout(out), redirect_stderr(err):
+                    code = ptr.main(argv)
+                self.assertEqual(code, 1, argv)
+                self.assertEqual(out.getvalue(), "", argv)
+                self.assertEqual(err.getvalue(),
+                                 "trader-pelosi is not available for NSE (it reads US House disclosures)\n")
+        finally:
+            ptr.urllib.request.urlopen, ptr.subprocess.run, ptr.subprocess.Popen = old
+        self.assertEqual(calls, [])
+
+    def test_the_message_constant(self):
+        self.assertEqual(ptr.DISABLED, "trader-pelosi is not available for NSE (it reads US House disclosures)")
+
+    def test_the_script_exits_1(self):
+        import subprocess
+        import sys
+        here = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        p = subprocess.run([sys.executable, os.path.join(here, "trader-pelosi", "ptr.py"), "index"],
+                           stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
+        self.assertEqual(p.returncode, 1)
+        self.assertEqual(p.stderr.strip(), ptr.DISABLED)
+
+
+# The tests below cover the US reference code that is kept but unreachable (they run offline on saved files).
 class Index(unittest.TestCase):
     def setUp(self):
         self.rows = ptr.load_index(2026, offline=ZIP)

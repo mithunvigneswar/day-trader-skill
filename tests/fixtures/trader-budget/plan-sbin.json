@@ -1,0 +1,21 @@
+{
+  "created_by": "trader-exit",
+  "symbol": "SBIN.NS",
+  "side": "buy",
+  "date": "2026-10-19",
+  "setup": "orb",
+  "entry": 992.5,
+  "entry_time": "10:15 AM",
+  "entry_bar": 12,
+  "interval": "5m",
+  "opening_range": {"high": 990.6, "low": 985.0, "minutes": 15},
+  "stop": 987.8,
+  "stop_rule": "or_mid",
+  "stop_label": "opening-range midpoint",
+  "target": 997.5,
+  "target_r": 1.06,
+  "target_label": "1.06R",
+  "risk_per_share": 4.7,
+  "reward_risk": 1.06,
+  "flat_by": "15:15"
+}

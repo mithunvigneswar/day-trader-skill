@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 """Congress trade tracker for trader-pelosi. Standard library only.
+DISABLED for the NSE pack: trader-pelosi is not available for NSE. main() prints that and exits 1 without any network call.
+The US code below is kept but unreachable.
 
 Reads the House Clerk's public financial disclosure index and the Periodic
 Transaction Reports (PTRs) members of the House file when they, their spouse
@@ -473,7 +475,16 @@ def _fetch_and_read(doc_id, year, pdf_dir, filed=None):
     return path, report
 
 
+DISABLED = "trader-pelosi is not available for NSE (it reads US House disclosures)"
+
+
 def main(argv=None):
+    """The NSE pack has no equivalent of this US-only data source, so nothing runs and nothing is fetched."""
+    print(DISABLED, file=sys.stderr)
+    return 1
+
+
+def _us_main(argv=None):
     args = _parser().parse_args(argv)
     if not args.cmd:
         _parser().print_help()

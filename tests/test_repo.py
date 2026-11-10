@@ -26,7 +26,7 @@ def frontmatter(path):
 
 def every_text_file():
     for base, dirs, files in os.walk(ROOT):
-        dirs[:] = [d for d in dirs if d not in (".git", "__pycache__")]
+        dirs[:] = [d for d in dirs if d not in (".git", "__pycache__", "aidlc-docs")]
         for f in files:
             if f.endswith((".md", ".py", ".json", ".csv", ".txt", ".xml")) or f == "LICENSE":
                 yield os.path.join(base, f)
@@ -39,7 +39,7 @@ class Repo(unittest.TestCase):
         self.assertEqual(found, sorted(SKILLS))
 
     def test_root_matches_the_reel(self):
-        root = sorted(d for d in os.listdir(ROOT) if not d.startswith(".git"))
+        root = sorted(d for d in os.listdir(ROOT) if not d.startswith(".git") and d != "aidlc-docs")
         self.assertEqual(root, sorted([".claude-plugin", "LICENSE", "README.md", "tests"] + SKILLS))
 
     def test_frontmatter_name_and_description(self):
@@ -121,18 +121,36 @@ class Repo(unittest.TestCase):
     def test_day_trading_limits_ship_in_the_example_config(self):
         with open(os.path.join(ROOT, "trader-budget", "config.example.json")) as fh:
             cfg = json.load(fh)
-        for k in ("max_loss_per_trade_usd", "max_daily_loss_usd", "max_trades_per_day",
+        for k in ("max_loss_per_trade_inr", "max_daily_loss_inr", "max_trades_per_day", "max_open_trades",
                   "min_reward_risk", "require_stop", "no_entries_after", "flat_by"):
             self.assertIn(k, cfg, k)
         self.assertIs(cfg["require_stop"], True)
         self.assertIs(cfg.get("allow_short", False), False)
-        self.assertIs(cfg.get("allow_margin", False), False)
 
-    def test_paper_trading_is_the_default(self):
+    def test_example_config_is_nse_in_rupees(self):
         with open(os.path.join(ROOT, "trader-budget", "config.example.json")) as fh:
             cfg = json.load(fh)
-        self.assertIs(cfg["paper"], True)
-        self.assertIs(cfg.get("allow_options", False), False)
+        self.assertEqual((cfg["market"], cfg["timezone"], cfg["currency"]), ("NSE", "Asia/Kolkata", "INR"))
+        self.assertEqual((cfg["no_entries_before"], cfg["flat_by"]), ("09:30", "15:00"))
+        self.assertEqual(cfg["leverage_multiplier_mis"], 5.0)
+        self.assertEqual(len(cfg["universe"]), 11)
+        for sym in cfg["universe"]:
+            self.assertRegex(sym, r"^[A-Z0-9&\-]+\.NS$")
+        for gone in ("paper", "broker", "sec_user_agent", "pdt_guard", "allow_options", "allow_margin", "fractional"):
+            self.assertNotIn(gone, cfg, gone)
+
+    def test_no_us_only_services_in_my_skills(self):
+        # the NSE pack talks to Yahoo only: no SEC, House, Senate, Nasdaq Trader, Stooq, Alpaca or IBKR
+        banned = ("sec.gov", "house.gov", "senate.gov", "nasdaqtrader", "stooq.com", "alpaca.markets",
+                  "api.ibkr.com", "place_stock_order")
+        for s in ("trader-budget", "trader-risk", "trader-broker", "trader-news"):
+            folder = os.path.join(ROOT, s)
+            for f in os.listdir(folder):
+                if f.endswith((".py", ".md", ".json")):
+                    with open(os.path.join(folder, f), encoding="utf-8") as fh:
+                        text = fh.read().lower()
+                    for b in banned:
+                        self.assertNotIn(b, text, "%s/%s" % (s, f))
 
 
 if __name__ == "__main__":

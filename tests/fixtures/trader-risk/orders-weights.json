@@ -3,35 +3,35 @@
   "status": "proposed",
   "orders": [
     {
-      "symbol": "AAPL",
+      "symbol": "RELIANCE.NS",
       "side": "buy",
       "notional": "1250",
       "type": "market",
       "time_in_force": "day"
     },
     {
-      "symbol": "AXP",
+      "symbol": "HDFCBANK.NS",
       "side": "buy",
       "notional": "1119",
       "type": "market",
       "time_in_force": "day"
     },
     {
-      "symbol": "GOOGL",
+      "symbol": "INFY.NS",
       "side": "buy",
       "notional": "823",
       "type": "market",
       "time_in_force": "day"
     },
     {
-      "symbol": "KO",
+      "symbol": "ITC.NS",
       "side": "buy",
       "notional": "708",
       "type": "market",
       "time_in_force": "day"
     },
     {
-      "symbol": "BAC",
+      "symbol": "SBIN.NS",
       "side": "buy",
       "notional": "600",
       "type": "market",

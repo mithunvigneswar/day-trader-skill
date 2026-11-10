@@ -1,16 +1,14 @@
 ---
 name: trader-analyst
 description: >-
-  The Earnings Analyst. Reads a company's reported numbers straight from SEC
-  EDGAR (XBRL company facts from its 10-Qs and 10-Ks, plus the latest earnings
-  8-K and its press release) and sums up what changed: revenue, gross,
-  operating and net margins, net income and diluted EPS, quarter by quarter,
-  each against the same quarter a year earlier, with the trailing twelve
-  months. Reads an earnings call transcript when you paste one. Use when the
-  user says "how did Tesla's earnings look", "analyze the earnings", "what
-  changed this quarter", "is revenue growing", "check the 10-Q", "compare
-  margins", "sum up the call", "does it report this week", or before trading
-  a stock around its earnings.
+  The Earnings Analyst. Disabled in the NSE pack: it read US SEC EDGAR filings
+  (XBRL company facts, 10-Qs, 10-Ks and 8-K earnings releases), and India has
+  no equivalent feed that is free and keyless. The tool prints "trader-analyst
+  is not available for NSE (it reads US SEC filings)", exits with code 1 and
+  fetches nothing. For an NSE stock, read the company's results on the NSE or
+  BSE announcements page and paste the numbers into the chat. Use when the
+  user says "analyze the earnings", "how did the quarter look", "check the
+  results", or "does it report this week" and expects an automatic fetch.
 argument-hint: "[tickers]"
 ---
 
@@ -28,9 +26,10 @@ Tool in this folder (standard library Python, no keys):
 python3 "${CLAUDE_SKILL_DIR}/facts.py" --help
 ```
 
-It needs the SEC User-Agent (`sec_user_agent` in `trader/config.json`, or
-`SEC_USER_AGENT`): "Your Name you@example.com" with the user's real name and
-email. It refuses to call SEC without one.
+**Disabled for NSE.** `facts.py` prints "trader-analyst is not available for NSE
+(it reads US SEC filings)" and exits 1 without any network call. Do not try to
+work around it or fetch SEC data. The description of the original US behaviour
+below is kept for reference only.
 
 ## What it reads and writes
 

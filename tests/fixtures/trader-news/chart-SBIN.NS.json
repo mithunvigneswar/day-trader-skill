@@ -1,0 +1,43 @@
+{
+ "chart": {
+  "result": [
+   {
+    "meta": {
+     "currency": "INR",
+     "symbol": "SBIN.NS",
+     "exchangeName": "NSI",
+     "instrumentType": "EQUITY",
+     "regularMarketTime": 1792385100,
+     "gmtoffset": 19800,
+     "timezone": "IST",
+     "exchangeTimezoneName": "Asia/Kolkata",
+     "regularMarketPrice": 1011.0,
+     "chartPreviousClose": 980.1,
+     "previousClose": 980.1,
+     "longName": "State Bank of India",
+     "shortName": "STATE BANK OF INDIA",
+     "dataGranularity": "5m",
+     "range": "1d",
+     "synthetic_fixture": "hand-written for the tests, not a real quote"
+    },
+    "timestamp": [
+     1792384500,
+     1792384800,
+     1792385100
+    ],
+    "indicators": {
+     "quote": [
+      {
+       "close": [
+        1005.0,
+        1008.5,
+        1011.0
+       ]
+      }
+     ]
+    }
+   }
+  ],
+  "error": null
+ }
+}

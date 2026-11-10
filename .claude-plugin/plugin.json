@@ -16,7 +16,8 @@
     "stock-market",
     "backtesting",
     "opening-range-breakout",
-    "paper-trading"
+    "nse",
+    "india"
   ],
   "skills": "./"
 }

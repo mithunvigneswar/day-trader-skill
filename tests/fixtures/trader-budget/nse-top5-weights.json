@@ -1,0 +1,12 @@
+{
+  "source": "illustrative raw weights for the weights-mode tests, not a recommendation",
+  "as_of": "2026-11-09",
+  "note": "Top 5 names. weight is not yet renormalised.",
+  "weights": [
+    {"ticker": "RELIANCE.NS", "name": "Reliance Industries", "weight": 22.04},
+    {"ticker": "HDFCBANK.NS", "name": "HDFC Bank", "weight": 17.14},
+    {"ticker": "INFY.NS", "name": "Infosys", "weight": 12.62},
+    {"ticker": "ITC.NS", "name": "ITC", "weight": 10.86},
+    {"ticker": "SBIN.NS", "name": "State Bank of India", "weight": 9.2}
+  ]
+}

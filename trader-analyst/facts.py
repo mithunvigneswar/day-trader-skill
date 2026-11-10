@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 """Earnings reader for trader-analyst. Standard library only.
+DISABLED for the NSE pack: trader-analyst is not available for NSE. main() prints that and exits 1 without any network call.
+The US code below is kept but unreachable.
 
 Pulls a company's reported numbers from SEC's XBRL "company facts" API and
 lays out what changed, quarter by quarter: revenue, gross, operating and net
@@ -467,7 +469,16 @@ def ticker_ciks(fetcher):
     return out
 
 
+DISABLED = "trader-analyst is not available for NSE (it reads US SEC filings)"
+
+
 def main(argv=None):
+    """The NSE pack has no equivalent of this US-only data source, so nothing runs and nothing is fetched."""
+    print(DISABLED, file=sys.stderr)
+    return 1
+
+
+def _us_main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("tickers", nargs="*", help="tickers, e.g. AAPL KO")
     ap.add_argument("--cik", help="use this CIK instead of a ticker lookup (one company)")

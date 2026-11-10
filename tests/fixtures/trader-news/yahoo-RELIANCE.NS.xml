@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- synthetic fixture written for the tests in the shape of Yahoo Finance headline RSS; not real news -->
+<rss version="2.0">
+    <channel>
+        <description>Latest Financial News for RELIANCE.NS</description>
+        <item>
+            <description>Lenders including State Bank of India may fund the deal, people familiar said.</description>
+            <guid isPermaLink="false">reliance-talks-acquire-solar-stake</guid>
+            <link>https://finance.yahoo.com/news/reliance-talks-acquire-solar-stake.html</link>
+            <pubDate>Mon, 19 Oct 2026 03:55:00 +0000</pubDate>
+            <title>Reliance Industries in talks to acquire stake in solar maker</title>
+        </item>
+        <item>
+            <description>Heavyweights supported the benchmarks in early trade.</description>
+            <guid isPermaLink="false">sensex-nifty-edge-up-reliance</guid>
+            <link>https://finance.yahoo.com/news/sensex-nifty-edge-up-reliance.html</link>
+            <pubDate>Mon, 19 Oct 2026 04:20:00 +0000</pubDate>
+            <title>Sensex, Nifty edge up; Reliance leads gainers (RELIANCE)</title>
+        </item>
+        <item>
+            <description>Analysts expect steady refining margins and retail growth.</description>
+            <guid isPermaLink="false">reliance-results-due-this-week</guid>
+            <link>https://finance.yahoo.com/news/reliance-results-due-this-week.html</link>
+            <pubDate>Mon, 19 Oct 2026 04:40:00 +0000</pubDate>
+            <title>Reliance results due this week: what to expect</title>
+        </item>
+    </channel>
+</rss>
